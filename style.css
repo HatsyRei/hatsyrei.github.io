@@ -122,7 +122,6 @@ body {
     top: 30%; left: 60px;
     height: 30%; width: 200px;
     font-family: ProductSans; font-size: 1.3em;
-    border: 1px red solid;
 }
 
 #reload-btn {

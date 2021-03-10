@@ -15,6 +15,7 @@ let SEM_list = [];
 let scorelist = [];
 let sentence;
 let inputSentence;
+let inputSentenceList = [];
 let score;
 let scoreDetails;
 let startbtn;
@@ -99,7 +100,17 @@ window.onload = () => {
         document.getElementById("result-panel").style.display = "block";
         document.getElementById("results-total-score").innerHTML = "Total Score: " + totalScore;
         document.getElementById("results-total-score-details").innerHTML = "Total SENT = " + SENT_list.reduce((a, b) => a + b, 0) + "<br>Total NBR = " + NBR_list.reduce((a, b) => a + b, 0) + "<br>Total SYN = " + SYN_list.reduce((a, b) => a + b, 0) + "<br>Total FUNC = " + FUNC_list.reduce((a, b) => a + b, 0) + "<br>Total LEX = " + LEX_list.reduce((a, b) => a + b, 0) + "<br>Total SEM = " + SEM_list.reduce((a, b) => a + b, 0);
+        document.getElementById("result-details").value += "Obtained speech and evaluation results:\n\n";
 
+        inputSentenceList.forEach((item, index) => {
+            document.getElementById("result-details").value += (index+1) + ". " + item + "\n";
+            document.getElementById("result-details").value += "SENT = " + SENT_list[index] + "\n";
+            document.getElementById("result-details").value += "NBR  = " + NBR_list[index] + "\n";
+            document.getElementById("result-details").value += "SYN  = " + SYN_list[index] + "\n";
+            document.getElementById("result-details").value += "FUNC = " + FUNC_list[index] + "\n";
+            document.getElementById("result-details").value += "LEX  = " + LEX_list[index] + "\n";
+            document.getElementById("result-details").value += "SEM  = " + SEM_list[index] + "\n\n";
+        });
     }
 
     try {
@@ -123,6 +134,7 @@ window.onload = () => {
             // print recognition results to screen
             let result = speechToText.toLowerCase();
             let target = sentences[N].toLowerCase();
+            inputSentenceList.push(result);
             inputSentence.innerHTML = result;
             
             // tokenize results
