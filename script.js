@@ -121,13 +121,21 @@ window.onload = () => {
             if (tokens.includes(checker[N]["D"])) FUNC += 1;
 
             // LEX
+            let KK_list = [];
             checker[N]["KK"].split(" ").forEach((item, index) => {
+                KK_list.push(item);
                 let re = new RegExp(item, "g");
                 if (re.test(result)) LEX += 1;
             });
 
             // SEM
-            SEM = 0;
+            checker[N]["P"].split(" ").forEach((item, index) => {
+                item = item.replace(/_/g, " ");
+                item = item.replace('<KK>', KK_list[index]);
+                let re = new RegExp(item, "g");
+                if (re.test(result)) SEM += 1;
+            });
+            SEM = Math.floor(SEM / checker[N]["P"].split(" ").length);
 
             // temporary codes
             scoreDetails.innerHTML = "SENT = " + SENT + "<br>NBR = " + NBR + "<br>SYN = " + SYN + "<br>FUNC = " + FUNC + "<br>LEX = " + LEX + "<br>SEM = " + SEM;
