@@ -16,13 +16,6 @@ let sentences = [
     "Malam ini kakak mencari benang dan ibu menyapu lantai"             ,
 ]
 
-// SENT = count 9 1 mark
-// NBR = 9 anywhere 1 mark
-// SYN = correct grammar, KK or KH can be syn 1 mark
-// FUNC = component match 1 mark each
-// LEX = KK, two marks each, if syn then 1 mark
-// SEM = P matching (write as regex?) 1 mark
-
 let checker = [
     {
         "KGN" : "ibu ayah",
@@ -36,9 +29,127 @@ let checker = [
     {
         "KGN" : "ibu ayah",
         "KM"  : "",
+        "R"   : "",
+        "KH"  : "dan",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(mem)?(baca)\\b",
+        "P"   : "ibu_<KK>_kasut ayah_<KK>_buku"
+    },
+    {
+        "KGN" : "ibu ayah",
+        "KM"  : "",
+        "R"   : "bahawa",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(mem)?(beritahu)\\b \\b(menari)\\b",
+        "P"   : "ibu_<KK>_anak ayah_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "ayah ibu",
+        "KM"  : "",
+        "R"   : "bahawa",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(mem)?(beritahu)\\b \\b(me)?nyanyi\\b",
+        "P"   : "ayah_<KK>_anak ibu_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "ayah ibu",
+        "KM"  : "",
         "R"   : "yang",
         "KH"  : "",
         "D"   : "ini",
-        "KK"  : "mencari baca"
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(baca|kaji)\\b",
+        "P"   : "ayah_<KK>_majalah ibu_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "ayah ibu",
+        "KM"  : "",
+        "R"   : "",
+        "KH"  : "dan",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(me)?(masak)\\b",
+        "P"   : "ayah_<KK>_selimut ibu_<KK>_air"
+    },
+    {
+        "KGN" : "adik abang",
+        "KM"  : "",
+        "R"   : "",
+        "KH"  : "dan",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(men)?(cuci)\\b",
+        "P"   : "adik_<KK>_tuala abang_<KK>_kereta"
+    },
+    {
+        "KGN" : "adik abang",
+        "KM"  : "",
+        "R"   : "bahawa",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(mem)?(beritahu)\\b \\b(menari)\\b",
+        "P"   : "adik_<KK>_kakak abang_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "adik abang",
+        "KM"  : "",
+        "R"   : "yang",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(simpan)\\b",
+        "P"   : "adik_<KK>_kunci abang_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "adik ibu",
+        "KM"  : "",
+        "R"   : "yang",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(sembunyi|sorok)\\b",
+        "P"   : "adik_<KK>_keropok ibu_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "adik ibu",
+        "KM"  : "",
+        "R"   : "",
+        "KH"  : "dan",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(me)?(masak)\\b",
+        "P"   : "adik_<KK>_gunting ibu_<KK>_bubur"
+    },
+    {
+        "KGN" : "adik abang",
+        "KM"  : "",
+        "R"   : "bahawa",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(mem)?(beritahu)\\b \\b(jatuh)\\b",
+        "P"   : "adik_<KK>_ibu abang_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "kakak adik",
+        "KM"  : "",
+        "R"   : "bahawa",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(mem)?(beritahu)\\b \\(me)?(nangis)\\b",
+        "P"   : "kakak_<KK>_ibu adik_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "kakak ibu",
+        "KM"  : "",
+        "R"   : "yang",
+        "KH"  : "",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(lipat)\\b",
+        "P"   : "kakak_<KK>_baju ibu_(telah_)?<KK>"
+    },
+    {
+        "KGN" : "kakak ibu",
+        "KM"  : "",
+        "R"   : "",
+        "KH"  : "dan",
+        "D"   : "ini",
+        "KK"  : "\\b(men)?(cari|dapat)(kan)?\\b \\b(menyapu|sapu)\\b",
+        "P"   : "kakak_<KK>_benang ibu_<KK>_lantai"
     },
 ];
