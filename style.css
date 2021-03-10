@@ -41,7 +41,7 @@ body {
 
 #main-content {
     height: 76%; width: 100%;
-    top: 20%;
+    top: 24%;
     position: absolute;
     border-radius: 0px 0px 10px 10px;
 }
@@ -70,7 +70,7 @@ body {
 
 #score-details {
     position: absolute;
-    top: 60%; left: 70px;
+    top: 55%; left: 70px;
     height: 27%; width: 200px;
     font-family: ProductSans; font-size: 1.3em;
     color: #7a7a7a;
@@ -97,14 +97,36 @@ body {
 #start-btn {
     background-color: #ff4a4a;
     right: 2vw;
-    bottom: 0.5vw;
+    bottom: 2vw;
 }
 
 #next-btn {
     background-color: #0099ff;
     right: 2vw;
-    bottom: 4vw;
+    bottom: 6vw;
     opacity: 0;
     display: none;
     transition: opacity 1s;
+}
+
+#result-panel {
+    height: 76%; width: 100%;
+    top: 24%;
+    position: absolute;
+    border-radius: 0px 0px 10px 10px;
+    display: none;
+}
+
+#results-total-score-details {
+    position: absolute;
+    top: 30%; left: 60px;
+    height: 30%; width: 200px;
+    font-family: ProductSans; font-size: 1.3em;
+    border: 1px red solid;
+}
+
+#reload-btn {
+    background-color: #ff4a4a;
+    left: 60px;
+    bottom: 3vw;
 }

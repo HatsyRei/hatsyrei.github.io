@@ -1,8 +1,17 @@
 "use strict";
 
 let N = 0;
-let lim_N = 14;
+//let lim_N = 14;
+let lim_N = 5;
 let totalScore = 0;
+
+let SENT_list = [];
+let NBR_list = [];
+let SYN_list = [];
+let FUNC_list = [];
+let LEX_list = [];
+let SEM_list = [];
+
 let scorelist = [];
 let sentence;
 let inputSentence;
@@ -10,6 +19,7 @@ let score;
 let scoreDetails;
 let startbtn;
 let nextbtn;
+let reloadbtn;
 let aud;
 
 window.onload = () => {
@@ -20,6 +30,7 @@ window.onload = () => {
     scoreDetails = document.getElementById("score-details");
     startbtn = document.getElementById("start-btn");
     nextbtn = document.getElementById("next-btn");
+    reloadbtn = document.getElementById("reload-btn");
     aud = new Audio('src/audio/'+(N+1)+'.m4a');
 
     // populate scorelist with the same number of zeros as the number of sentences we have
@@ -66,6 +77,7 @@ window.onload = () => {
         }
         else {
             // show results panel
+            showResultPanel();
         }
 
         // reenable button after fade out no display
@@ -74,6 +86,20 @@ window.onload = () => {
             nextbtn.style.display = "none";
             nextbtn.disabled = false;
         }, 1000);
+    }
+
+    reloadbtn.onclick = () => {
+        window.location.reload();
+        return false;
+    }
+
+    function showResultPanel() {
+
+        document.getElementById("main-content").style.display = "none";
+        document.getElementById("result-panel").style.display = "block";
+        document.getElementById("results-total-score").innerHTML = "Total Score: " + totalScore;
+        document.getElementById("results-total-score-details").innerHTML = "Total SENT = " + SENT_list.reduce((a, b) => a + b, 0) + "<br>Total NBR = " + NBR_list.reduce((a, b) => a + b, 0) + "<br>Total SYN = " + SYN_list.reduce((a, b) => a + b, 0) + "<br>Total FUNC = " + FUNC_list.reduce((a, b) => a + b, 0) + "<br>Total LEX = " + LEX_list.reduce((a, b) => a + b, 0) + "<br>Total SEM = " + SEM_list.reduce((a, b) => a + b, 0);
+
     }
 
     try {
@@ -137,7 +163,13 @@ window.onload = () => {
             });
             SEM = Math.floor(SEM / checker[N]["P"].split(" ").length);
 
-            // temporary codes
+            SENT_list.push(SENT);
+            NBR_list.push(NBR);
+            SYN_list.push(SYN);
+            FUNC_list.push(FUNC);
+            LEX_list.push(LEX);
+            SEM_list.push(SEM);
+
             scoreDetails.innerHTML = "SENT = " + SENT + "<br>NBR = " + NBR + "<br>SYN = " + SYN + "<br>FUNC = " + FUNC + "<br>LEX = " + LEX + "<br>SEM = " + SEM;
             scoreDetails.style.opacity = "1";
 
@@ -145,7 +177,6 @@ window.onload = () => {
             totalScore += tempScore;
             score.innerHTML = "Score : " + totalScore;
             scorelist.push(tempScore);
-
         }
     
         // onend, spawn nextbtn
