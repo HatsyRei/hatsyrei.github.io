@@ -1,8 +1,7 @@
 "use strict";
 
 let N = 0;
-//let lim_N = 14;
-let lim_N = 5;
+let lim_N = 14;
 let totalScore = 0;
 
 let SENT_list = [];
@@ -21,6 +20,7 @@ let scoreDetails;
 let startbtn;
 let nextbtn;
 let reloadbtn;
+let quitbtn;
 let aud;
 
 window.onload = () => {
@@ -32,6 +32,7 @@ window.onload = () => {
     startbtn = document.getElementById("start-btn");
     nextbtn = document.getElementById("next-btn");
     reloadbtn = document.getElementById("reload-btn");
+    quitbtn = document.getElementById("quit");
     aud = new Audio('src/audio/'+(N+1)+'.m4a');
 
     // populate scorelist with the same number of zeros as the number of sentences we have
@@ -94,6 +95,10 @@ window.onload = () => {
         return false;
     }
 
+    quitbtn.onclick = () => {
+        showResultPanel();
+    }
+
     function showResultPanel() {
 
         document.getElementById("main-content").style.display = "none";
@@ -147,9 +152,6 @@ window.onload = () => {
             // NBR
             if (tokens.length == tokens_tar.length) NBR = 1;
 
-            // SYN
-            SYN = 0;
-
             // FUNC
             checker[N]["KGN"].split(" ").forEach((item, index) => {
                 if (tokens.includes(item)) FUNC += 1;
@@ -163,15 +165,22 @@ window.onload = () => {
             checker[N]["KK"].split(" ").forEach((item, index) => {
                 KK_list.push(item);
                 let re = new RegExp(item, "g");
-                if (re.test(result)) LEX += 1;
+                if (re.test(result)) {
+                    LEX += 2;
+                    re.lastIndex = 0;
+                    let match = re.exec(result);
+                    if (!tokens_tar.includes(match[0])) LEX -= 1;
+                }
             });
 
-            // SEM
+            // SEM, SYN
             checker[N]["P"].split(" ").forEach((item, index) => {
                 item = item.replace(/_/g, " ");
                 item = item.replace('<KK>', KK_list[index]);
                 let re = new RegExp(item, "g");
-                if (re.test(result)) SEM += 1;
+                if (re.test(result)) {
+                    SEM += 1; SYN = 1;
+                }
             });
             SEM = Math.floor(SEM / checker[N]["P"].split(" ").length);
 
