@@ -20,8 +20,8 @@ let misses = [0];
 let claps = 0;
 
 function postUpdate(pres, accu) {
-    document.getElementById("precision").value = pres.toString();
-    document.getElementById("accuracy").value = accu.toString();
+    document.getElementById("prec").value = pres.toString();
+    document.getElementById("accu").value = accu.toString();
     document.getElementById("datenow").value = (() => {
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
