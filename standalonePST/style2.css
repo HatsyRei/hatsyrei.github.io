@@ -1,0 +1,40 @@
+@font-face { font-family: ProductSans; src: url("src/psf.ttf"); }
+@font-face { font-family: Roboto; src: url("src/rbt.ttf"); }
+
+html {
+    padding: 0; margin: 0;
+    height: 100vh; width: 100vw;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    background: rgb(39, 39, 39);
+    width: 100%;
+}
+
+#container {
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#box {
+    height: 70%; width: 70%;
+    min-height: 500px; min-width: 1000px;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.mat-card {
+    position: absolute;
+    height: 40%;
+    width: 55%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}

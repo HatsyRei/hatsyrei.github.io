@@ -1,0 +1,241 @@
+@font-face { font-family: ProductSans; src: url("src/psf.ttf"); }
+@font-face { font-family: Roboto; src: url("src/rbt.ttf"); }
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    overflow: hidden;
+}
+
+body {
+    position: relative;
+    margin: 0; padding: 0;
+    font-family: Roboto;
+}
+
+#bg-image {
+    background-image: url(src/CLCT-background.jpg);
+    background-size: cover;
+    filter: blur(8px);
+    height: 100vh;
+    transition: all 1s;
+}
+
+#hitbox {
+    position: absolute; top: 25%; left: 100px;
+    border: 5px white solid;
+    border-radius: 20px;
+    height: 50%;
+    width: 5%;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.darkbar {
+    position: absolute; top: 30%; right: -100px;
+    border-radius: 20px;
+    opacity: 1;
+    height: 40%;
+    width: 3%;
+    background-color: white;
+}
+
+#options {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#options-content {
+    position: relative;
+    background-color: whitesmoke;
+    height: 70%;
+    width: 35%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 2px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 17vw;
+    height: 5px;
+    border-radius: 3px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+.slider:hover { opacity: 1; }
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    background: rgb(0, 140, 255);
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    position: relative;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all .2s
+}
+input[type=checkbox]:hover {
+    opacity: 1;
+}
+input[type=checkbox]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    transition: all .5s;
+    border: 2px solid #555555;
+    border-radius: 3px;
+    background-color: whitesmoke;
+}
+input[type=checkbox]:checked:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    border: 2px solid rgb(0, 140, 255);
+    background-color:rgb(0, 140, 255);
+}
+input[type=checkbox]:checked:after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid whitesmoke;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 5px;
+    left: 8px;
+}
+
+select {
+	font-size: 16px;
+	font-family: Roboto;
+	padding: 10px;
+    width: 40%;
+    outline: none;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#set-btn {
+    font-family: ProductSans;
+    font-size: 1.2em;
+    border: none;
+    color: white;
+    background-color: rgb(0, 115, 192);
+    position: absolute;
+    right: 2vw;
+    bottom: 2vw;
+    height: 6vh;
+    width: 10vw;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: background-color 1s;
+    border-radius: 2px;
+}
+#set-btn:hover {
+    background-color: rgb(23, 80, 112);
+}
+
+#playBtn {
+    position: absolute;
+    right: 4%;
+    bottom: 6%;
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background-color: rgb(45, 154, 255);
+    cursor: pointer;
+    transition: all 1s;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+@keyframes fadeOutScaleLarge {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.3);
+    }
+}
+
+.fade-out-scale-large {
+    animation-name: fadeOutScaleLarge;
+    animation-duration: 0.3s;
+    opacity: 0;
+}
+
+#result-container {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 1s all;
+}
+
+#report-card {
+    position: relative;
+    background-color: rgba(0,0,0,0.5);
+    height: 70%;
+    width: 85%;
+    border-radius: 2px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#sidebar {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%; width: 20%;
+    border-radius: 2px;
+    background: transparent;
+    color: white;
+}
+
+#main-report {
+    position: absolute;
+    top: 0; left: 20%;
+    height: 100%; width: 80%;
+    border-radius: 2px;
+    background: whitesmoke;
+}

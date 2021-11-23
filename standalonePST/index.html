@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Psychology Software Tool</title>
+        <link rel = "stylesheet" href = "style2.css">
+    </head>
+    <script src = "test.txt"></script>
+    <body>
+        <div id = "container">
+            <div id = "box">
+                <img src = "src/lighthouse-night.jpg" style = "height: 100%; position: absolute; border-radius: 10px 0 0 10px;">
+                <img src = "src/profile.png" style = "position: absolute; bottom: 47%; left: 22%;" onclick = "window.location.href='AdminPanel/index.html'">
+                <img src = "src/bug.png" style = "position: absolute; bottom: 47%; left: 26%;">
+                <img src = "src/logout.png" style = "position: absolute; bottom: 47%; left: 30%;">
+                <div class = "mat-card" style = "top: 6%; left: 40%; cursor: pointer;" onclick = "window.location.href='SLIDiagnosisBPMT/index.html'">
+                    <img src = "src/diagnosis.png" style = "height: 100%; position: absolute;">
+                    <div style = "position: absolute; top: 39%; left: 35%; font-family: ProductSans; font-size: 2em;">SLI Diagnosis</div>
+                    <img src = "src/edit.png" style = "position: absolute; bottom: 8%; right: 3%; height: 50px;">
+                </div>
+                <div class = "mat-card" style = "top: 53%; left: 40%; cursor: pointer;" onclick = "window.location.href='Reithm/index.html'">
+                    <img src = "src/treatment.png" style = "height: 100%; position: absolute;">
+                    <div style = "position: absolute; top: 39%; left: 35%; font-family: ProductSans; font-size: 2em;">Music Therapy</div>
+                    <img src = "src/edit.png" style = "position: absolute; bottom: 8%; right: 3%; height: 50px;">
+                </div>
+            </div>
+        </div>
+        <script>
+            function save() {
+
+                var htmlContent = ["your-content-here"];
+                var bl = new Blob(htmlContent, {type: "html/text"});
+                var a = document.createElement("a");
+                a.href = URL.createObjectURL(bl);
+                a.download = "test.txt";
+                a.hidden = true;
+                document.body.appendChild(a);
+                a.innerHTML = "";
+                a.click();
+            }
+
+            console.log(text)
+        </script>
+    </body>
+</html>

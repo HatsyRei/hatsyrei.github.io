@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Reithm</title>
+        <link rel = "stylesheet" href = "style.css">
+        <script type = "text/javascript" src = "script.js"></script>
+        <script type = "text/javascript" src = "musicBeatInfo.js"></script>
+        <script type = "text/javascript" src = "Chart.js"></script>
+    </head>
+    <body>
+        <iframe name="votar" style="display:none;"></iframe>
+        <div id = "bg-image"></div>
+        <div id = "options">
+            <div id = "options-content">
+                <div style = "position: absolute; top: 5vh; left: 5vh; font-size: 1.5em;">Music Therapy Settings</div>
+                <div style = "position: absolute; top: 15vh; left: 5vh; font-size: 0.8em;">Track</div>
+                <select id="song-select" style = "position: absolute; top: 13vh; right: 15vw; font-size: 0.8em;">
+                    <option value="0" selected="selected">Shinkukan Dolls - CLCT</option>
+                    <option value="1">Twinkle Twinkle Little Star</option>
+                </select>
+                <div style = "position: absolute; top: 24vh; left: 5vh; font-size: 0.8em; font-family: Roboto;">Bar Frequency</div>
+                <div id = "barfreqtext" style = "position: absolute; top: 24vh; right: 16vw; font-size: 0.8em; font-family: Roboto;">x1</div>
+                <input type="range" min="1" max="3" value="2" class="slider" id="barfreqval" style="position: absolute; top: 28vh; left: 5vh;" oninput="barFreqUpdate(this.value)">
+                <div style = "position: absolute; top: 34vh; left: 5vh; font-size: 0.8em; font-family: Roboto;">Difficulty</div>
+                <div id = "playdifftext" style = "position: absolute; top: 34vh; right: 16vw; font-size: 0.8em; font-family: Roboto;">Easy</div>
+                <input type="range" min="1" max="3" value="1" class="slider" id="playdiffval" style="position: absolute; top: 38vh; left: 5vh;" oninput="playDiffUpdate(this.value)">
+                <input id = "has-bg-check" type="checkbox" checked style="position: absolute; top: 45vh; left: 5vh">
+                <div style = "position: absolute; top: 46vh; left: 6vw; font-family: Roboto;">Show Background</div>
+                <input id = "is-tut-mode" type="checkbox" style="position: absolute; top: 52vh; left: 5vh">
+                <div style = "position: absolute; top: 53vh; left: 6vw; font-family: Roboto;">Tutorial Mode</div>
+                <button id = "set-btn">Confirm</button>
+            </div>
+        </div>
+        <div id = "result-container">
+            <div id = "report-card">
+                <div id = "sidebar">
+                    <div style = "position: absolute; top: 5vh; left: 5vh; font-size: 1.8em;">Results</div>
+                    <div id = "track-name" style = "position: absolute; top: 15vh; left: 5vh; font-size: 0.9em;"></div>
+                    <div id = "duration" style = "position: absolute; top: 19vh; left: 5vh; font-size: 0.8em;"></div>
+                    <div id = "difficulty" style = "position: absolute; top: 23vh; left: 5vh; font-size: 0.8em;"></div>
+                    <div style = "position: absolute; top: 30vh; left: 5vh; font-size: 1.5em;">Overall Rating:</div>
+                    <div id = "overall-rating" style = "position: absolute; top: 35vh; left: 11vh; font-size: 10em;"></div>
+                </div>
+                <div id = "main-report">
+                    <div style = "position: absolute; top: 6vh; left: 6%; font-size: 1.6em;">Session Overview</div>
+                    <div id = "claptext" style = "position: absolute; top: 16vh; left: 7%; font-size: 0.8em;"></div>
+                    <div id = "barspawntext" style = "position: absolute; top: 20vh; left: 7%; font-size: 0.8em;"></div>
+                    <div id = "hittext" style = "position: absolute; top: 24vh; left: 7%; font-size: 0.8em;"></div>
+                    <div id = "misstext" style = "position: absolute; top: 28vh; left: 7%; font-size: 0.8em;"></div>
+                    <div class = "chart-container1" style = "position: absolute; top: 55%; left: 5%; width: 20vw;">
+                        <canvas id = "canvas-cumulative-chart"></canvas>
+                    </div>
+                    <div class = "chart-container2" style = "position: absolute; top: 55%; left: 35%; width: 20vw;">
+                        <canvas id = "canvas-pie"></canvas>
+                    </div>
+                    <div class = "chart-container3" style = "position: absolute; top: 45%; left: 65%; width: 12vw; height: 30vh">
+                        <canvas id = "canvas-bar"></canvas>
+                    </div>
+                    <img id = "submit-btn" src = "src/submit.png" style = "position: absolute; bottom: 5%; right: 3%; height: 60px; cursor: pointer;">
+                </div>
+            </div>
+        </div>
+        <form name = "update-form" action = "execute.php" method = "POST" target = "votar">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" id='precision' name="precision" value="">
+            <input type="hidden" id='accuracy' name="accuracy" value="">
+            <input type="hidden" id='datenow' name="datenow" value="">
+        </form>
+        <div id = "content">
+            <div id = "hitbox"></div>
+            <div id = "playBtn" onclick = "play()">▶</div>
+        </div>
+    </body>
+</html>

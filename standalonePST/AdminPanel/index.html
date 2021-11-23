@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <title>PST Admin Panel</title>
+        <link rel = "stylesheet" href = "style.css">
+        <script type = "text/javascript" src = "script.js"></script>
+        <script type = "text/javascript" src = "heatmap.js"></script>
+        <script type = "text/javascript" src= "Chart.min.js"></script>
+    </head>
+    <body>
+        <div id = "main-container">
+            <div id = "one" class = "floating-card">
+                <img src = "src/user-icon.png" style = "position: absolute; top: 0; left: 0; height: 100%;">
+                <div style = "position: absolute; top: 12%; left: 35%; font-size: 1.1em;">Account CRUD</div>
+                <div style = "position: absolute; top: 32%; left: 35%; font-size: 0.8em;">Please select one of the following options:</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 35%;" onclick = "displayOverlaySelection('C1','_')">C</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 47%;" onclick = "displayOverlaySelection('R1','_')">R</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 59%;" onclick = "displayOverlaySelection('U1','_')">U</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 71%;" onclick = "displayOverlaySelection('D1','_')">D</div>
+            </div>
+            <div id = "two" class = "floating-card">
+                <img src = "src/visualization-icon.png" style = "position: absolute; top: 0; left: 0; height: 100%;">
+                <div style = "position: absolute; top: 12%; left: 35%; font-size: 1.1em;">Generate Report</div>
+                <div style = "position: absolute; top: 32%; left: 35%; font-size: 0.8em;">Please input username of patient:</div>
+                <input style = "position: absolute; bottom: 12%; left: 35%; padding: 10px;" type="text" id="username" name="username">
+                <img src = "src/submit.png" style = "position:absolute; bottom: 11%; right: 10%; height: 45px; cursor: pointer;" onclick = "displayOverlaySelection('GR', document.getElementById('username').value)">
+            </div>
+            <div id = "thr" class = "floating-card">
+                <img src = "src/data-icon.png" style = "position: absolute; top: 0; left: 0; height: 100%;">
+                <div style = "position: absolute; top: 12%; left: 35%; font-size: 1.1em;">Manage Controlled Data</div>
+                <div style = "position: absolute; top: 32%; left: 35%; font-size: 0.8em;">Please select one of the following options:</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 35%;" onclick = "displayOverlaySelection('C2','_')">C</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 47%;" onclick = "displayOverlaySelection('R2','_')">R</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 59%;" onclick = "displayOverlaySelection('U2','_')">U</div>
+                <div class = "inner-balloon" style = "bottom: 12%; left: 71%;" onclick = "displayOverlaySelection('D2','_')">D</div>
+            </div>
+            <div id = "fou" class = "floating-card">
+                <img src = "src/heatmap-icon.png" style = "position: absolute; top: 0; left: 0; height: 100%;">
+                <div style = "position: absolute; top: 12%; left: 35%; font-size: 1.1em;">Regenerate Heatmap</div>
+                <div style = "position: absolute; top: 32%; left: 35%; font-size: 0.8em;">Recreate heatmap via saved coordinate string.</div>
+                <input style = "position: absolute; bottom: 12%; left: 35%; padding: 10px;" type="text" id="coordstring" name="coordstring">
+                <img src = "src/submit.png" style = "position:absolute; bottom: 11%; right: 10%; height: 45px; cursor: pointer;" onclick = "displayOverlaySelection('RH', document.getElementById('coordstring').value)">
+            </div>
+            <div id = "panel-content">
+                <!-- Account CRUD -->
+                <div id = "C1" class = "panel-overlay">
+                    <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Create Account</div>
+                    <div style = "position: absolute; top: 18.5%; left: 5%; font-size: 0.9em;">Username</div>
+                    <input style = "position: absolute; top: 17%; left: 22%; padding: 10px;" type="text" id="new-username" name="new-username">
+                    <div style = "position: absolute; top: 28.5%; left: 5%; font-size: 0.9em;">Password</div>
+                    <input style = "position: absolute; top: 27%; left: 22%; padding: 10px;" type="password" id="new-pwd" name="new-pwd">
+                    <div style = "position: absolute; top: 38.5%; left: 5%; font-size: 0.9em;">Retype password</div>
+                    <input style = "position: absolute; top: 37%; left: 22%; padding: 10px;" type="password" id="new-pwd-rep" name="new-pwd-rep">
+                    <div style = "position: absolute; top: 50%; left: 5%; font-size: 0.9em;">Administrator</div>
+                    <input style = "position: absolute; top: 49%; left: 21.5%; padding: 10px;" type="checkbox" id="new-admin" name="new-admin">
+                    <button class = "run-btn" style = "position: absolute; top: 60%; left: 29%;" onclick = "C1_run();">Run</button>
+
+                    <textarea id= "C1-panel-output" style = "position: absolute; top: 17%; left: 47%; height: 66%; width: 45%; padding: 10px;">Note:&#10&#10- Username should be unique, alphanumeric only.&#10- Password should be longer than 7 characters.&#10&#10----------&#10Output Log&#10----------&#10&#10</textarea>
+                </div>
+
+
+                <div id = "R1" class = "panel-overlay">
+                    <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Read Accounts</div>
+                    <div id = "table-container" style = "position: absolute; top: 17%; left: 5%; height: 35%; width: 90%; overflow: auto;">
+                        <table id = "R1-table" style = "width: 100%; font-size: 0.9em;"></table>
+                    </div>
+                    <textarea id= "R1-panel-output" style = "position: absolute; top: 58%; left: 5%; height: 35%; width: 90%; padding: 10px;"></textarea>
+                </div>
+
+
+                <div id = "U1" class = "panel-overlay">
+                    <form name = "U1-update-form" action = "execute.php" method = "POST" target = "votar">
+                        <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Update Account</div>
+                        <div style = "position: absolute; top: 18.5%; left: 5%; font-size: 0.9em;">Target username</div>
+                        <input style = "position: absolute; top: 17%; left: 22%; padding: 10px;" type="text" id="target-user" name="target-user">
+                        <div style = "position: absolute; top: 28.5%; left: 5%; font-size: 0.9em;">Updated username</div>
+                        <input style = "position: absolute; top: 27%; left: 22%; padding: 10px;" type="text" id="updated-usr" name="updated-usr">
+                        <div style = "position: absolute; top: 38.5%; left: 5%; font-size: 0.9em;">Updated password</div>
+                        <input style = "position: absolute; top: 37%; left: 22%; padding: 10px;" type="password" id="updated-pwd" name="updated-pwd">
+                        <div style = "position: absolute; top: 48.5%; left: 5%; font-size: 0.9em;">Retype password</div>
+                        <input style = "position: absolute; top: 47%; left: 22%; padding: 10px;" type="password" id="updated-pwd-rep" name="updated-pwd-rep">
+                        <input type="hidden" name="action" value="U1-update">
+                    </form>
+                    <button class = "run-btn" style = "position: absolute; top: 60%; left: 29%;" onclick = "U1_run();">Run</button>
+                    <textarea id= "U1-panel-output" style = "position: absolute; top: 17%; left: 47%; height: 66%; width: 45%; padding: 10px;">Note:&#10&#10- Leave blank options to retain original values.&#10&#10----------&#10Output Log&#10----------&#10&#10</textarea>
+                </div>
+
+
+                <div id = "D1" class = "panel-overlay">
+                    <form name = "D1-update-form" action = "execute.php" method = "POST" target = "votar">
+                        <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Delete Account</div>
+                        <div style = "position: absolute; top: 18.5%; left: 5%; font-size: 0.9em;">Target username</div>
+                        <input style = "position: absolute; top: 17%; left: 22%; padding: 10px;" type="text" id="D1-target-user" name="D1-target-user">
+                        <input type="hidden" name="action" value="D1-update">
+                    </form>
+                    <button class = "run-btn" style = "position: absolute; top: 30%; left: 29%;" onclick = "D1_run();">Run</button>
+                    <textarea id= "D1-panel-output" style = "position: absolute; top: 17%; left: 47%; height: 66%; width: 45%; padding: 10px;">----------&#10Output Log&#10----------&#10&#10</textarea>
+                </div>
+
+                <!-- Generate Report -->
+                <div id = "GR" class = "panel-overlay">
+                    <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">User Report</div>
+                    <div style = "position: absolute; top: 14%; left: 5%; font-size: 0.9em;">Radar chart with scale of 0 (poor) to 10 (excellent)</div>
+                    <div class = "GR-chart-container" style = "position: absolute; top: 17%; left: 5%; height: 65.5vh; width: 27vw;">
+                        <canvas id = "GR-chart-canvas"></canvas>
+                    </div>
+                    <div style = "position: absolute; top: 15%; left: 55%; font-size: 1.1em;">Diagnosis history</div>
+                    <div id = "table-container3" style = "position: absolute; top: 20%; left: 55%; height: 30%; width: 40%; overflow: auto;">
+                        <table id = "GR-table1" style = "width: 100%; font-size: 0.9em;"></table>
+                    </div>
+                    <div style = "position: absolute; top: 55%; left: 55%; font-size: 1.1em;">Treatment history</div>
+                    <div id = "table-container4" style = "position: absolute; top: 60%; left: 55%; height: 30%; width: 40%; overflow: auto;">
+                        <table id = "GR-table2" style = "width: 100%; font-size: 0.9em;"></table>
+                    </div>
+                </div>
+
+                <!-- Manage Controlled Data -->
+                <div id = "C2" class = "panel-overlay">
+                    <form name = "C2-update-form" action = "execute.php" method = "POST" target = "votar">
+                        <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Create Controlled Data</div>
+                        <div style = "position: absolute; top: 18.5%; left: 5%; font-size: 0.9em;">Controlled Score</div>
+                        <input style = "position: absolute; top: 17%; left: 22%; padding: 10px;" type="text" id="new-score" name="new-score">
+                        <input type="hidden" name="action" value="C2-update">
+                    </form>
+                    <button class = "run-btn" style = "position: absolute; top: 30%; left: 29%;" onclick = "C2_run();">Run</button>
+                    <textarea id= "C2-panel-output" style = "position: absolute; top: 17%; left: 47%; height: 66%; width: 45%; padding: 10px;">----------&#10Output Log&#10----------&#10&#10</textarea>
+                </div>
+
+
+
+                <div id = "R2" class = "panel-overlay">
+                    <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Read Controlled Data</div>
+                    <div id = "table-container2" style = "position: absolute; top: 17%; left: 5%; height: 35%; width: 90%; overflow: auto;">
+                        <table id = "R2-table" style = "width: 100%; font-size: 0.9em;"></table>
+                    </div>
+                    <textarea id= "R2-panel-output" style = "position: absolute; top: 58%; left: 5%; height: 35%; width: 90%; padding: 10px;"></textarea>
+                </div>
+
+
+                
+                <div id = "U2" class = "panel-overlay">
+                    <form name = "U2-update-form" action = "execute.php" method = "POST" target = "votar">
+                        <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Update Controlled Data</div>
+                        <div style = "position: absolute; top: 18.5%; left: 5%; font-size: 0.9em;">Target Data ID</div>
+                        <input style = "position: absolute; top: 17%; left: 22%; padding: 10px;" type="text" id="target-ID" name="target-ID">
+                        <div style = "position: absolute; top: 28.5%; left: 5%; font-size: 0.9em;">Updated score</div>
+                        <input style = "position: absolute; top: 27%; left: 22%; padding: 10px;" type="text" id="updated-data" name="updated-data">
+                        <input type="hidden" name="action" value="U2-update">
+                    </form>
+                    <button class = "run-btn" style = "position: absolute; top: 40%; left: 29%;" onclick = "U2_run();">Run</button>
+                    <textarea id= "U2-panel-output" style = "position: absolute; top: 17%; left: 47%; height: 66%; width: 45%; padding: 10px;">----------&#10Output Log&#10----------&#10&#10</textarea>
+                </div>
+
+
+                <div id = "D2" class = "panel-overlay">
+                    <form name = "D2-update-form" action = "execute.php" method = "POST" target = "votar">
+                        <div style = "position: absolute; top: 7%; left: 5%; font-size: 1.5em;">Delete Controlled Data</div>
+                        <div style = "position: absolute; top: 18.5%; left: 5%; font-size: 0.9em;">Target Data ID</div>
+                        <input style = "position: absolute; top: 17%; left: 22%; padding: 10px;" type="text" id="D2-target-ID" name="D2-target-ID">
+                        <input type="hidden" name="action" value="D2-update">
+                    </form>
+                    <button class = "run-btn" style = "position: absolute; top: 30%; left: 29%;" onclick = "D2_run();">Run</button>
+                    <textarea id= "D2-panel-output" style = "position: absolute; top: 17%; left: 47%; height: 66%; width: 45%; padding: 10px;">----------&#10Output Log&#10----------&#10&#10</textarea>
+                </div>
+
+                <!-- Regenerate HeatMap -->
+                <div id = "RH" class = "panel-overlay">
+                    <img id = "binpic1" style = "height: 230px; margin: 50px;" src = "src/PIC/q1a.png">
+                    <img id = "binpic2" style = "height: 230px; margin: 50px;" src = "src/PIC/q1b.png">
+                </div>
+
+                <!--<textarea id="panel-output" style = "position: absolute; top: 7%; left: 5%; padding: 10px;"></textarea>-->
+            </div>
+        </div>
+    </body>
+</html>
