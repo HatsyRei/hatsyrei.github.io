@@ -148,6 +148,8 @@ function showResults() {
     document.getElementById("track-name").innerHTML = beatMap[sel].songName;
     document.getElementById("duration").innerHTML = "Duration: " + Math.floor(audio.currentTime/60) + ":" + Math.floor(audio.currentTime%60);
     document.getElementById("difficulty").innerHTML = "Difficulty: " + document.getElementById("playdifftext").innerHTML;
+    console.log(accuracy);
+    console.log(precision);
     document.getElementById("overall-rating").innerHTML = ['C','C','B','B','B','A','S'][Math.ceil((accuracy+precision)/2*6)];
 
     document.getElementById("submit-btn").onclick = function() {
