@@ -35,14 +35,12 @@ function postUpdate(pres, accu) {
 function showResults() {
 
     document.getElementById("result-container").style.opacity = 1;
-    let accuracy_val, precision_val;
+    let accuracy_val = 0;
+    let precision_val = 0;
 
-    if (points[points.length-1]+misses[misses.length-1] != 0) {
+    if (points[points.length-1]+misses[misses.length-1] != 0 && claps != 0) {
         accuracy_val = points[points.length-1]/(points[points.length-1]+misses[misses.length-1]);
         precision_val = points[points.length-1]/claps;
-    }
-    else {
-        accuracy_val = 0; precision_val = 0;
     }
 
     let config1 = {
