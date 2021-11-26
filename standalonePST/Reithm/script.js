@@ -35,14 +35,14 @@ function postUpdate(pres, accu) {
 function showResults() {
 
     document.getElementById("result-container").style.opacity = 1;
-    let accuracy, precision;
+    let accuracy_val, precision_val;
 
     if (points[points.length-1]+misses[misses.length-1] != 0) {
-        accuracy = points[points.length-1]/(points[points.length-1]+misses[misses.length-1]);
-        precision = points[points.length-1]/claps;
+        accuracy_val = points[points.length-1]/(points[points.length-1]+misses[misses.length-1]);
+        precision_val = points[points.length-1]/claps;
     }
     else {
-        accuracy = 0; precision = 0;
+        accuracy_val = 0; precision_val = 0;
     }
 
     let config1 = {
@@ -105,7 +105,7 @@ function showResults() {
         data: {
             labels: ["accuracy", "precision"],
             datasets: [{
-                data: [accuracy.toFixed(2),precision.toFixed(2)],
+                data: [accuracy_val.toFixed(2),precision_val.toFixed(2)],
                 backgroundColor: ['rgba(149, 66, 245, 0.5)','rgba(255, 206, 711, 0.5)'],
                 borderColor: ['rgb(149, 66, 245)','rgb(255, 206, 71)'],
                 borderWidth: 1
@@ -148,12 +148,12 @@ function showResults() {
     document.getElementById("track-name").innerHTML = beatMap[sel].songName;
     document.getElementById("duration").innerHTML = "Duration: " + Math.floor(audio.currentTime/60) + ":" + Math.floor(audio.currentTime%60);
     document.getElementById("difficulty").innerHTML = "Difficulty: " + document.getElementById("playdifftext").innerHTML;
-    console.log(accuracy);
-    console.log(precision);
-    document.getElementById("overall-rating").innerHTML = ['C','C','B','B','B','A','S'][Math.ceil((accuracy+precision)/2*6)];
+    console.log(accuracy_val);
+    console.log(precision_val);
+    document.getElementById("overall-rating").innerHTML = ['C','C','B','B','B','A','S'][Math.ceil((accuracy_val+precision_val)/2*6)];
 
     document.getElementById("submit-btn").onclick = function() {
-        postUpdate(precision, accuracy);
+        postUpdate(precision_val, accuracy_val);
     }
 }
 
